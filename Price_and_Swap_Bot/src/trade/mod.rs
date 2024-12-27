@@ -99,7 +99,7 @@ impl TradeExecutor {
                 deadline,         // Deadline
             ),
         )?;
-        let prepared_call = method_call.value(amount_in); // Fix: Store the intermediate result
+        let prepared_call = method_call.value(amount_in); // Store the intermediate result to increase the lifetime
         let tx = prepared_call.send().await?;
         Ok(tx.tx_hash())
     }
@@ -118,7 +118,7 @@ impl TradeExecutor {
         // Construct the path: LINK -> WETH
         let path = vec![token_in, weth_address];
 
-        // Get current gas price and increase it by 10% to ensure the transaction goes through
+        // Get current gas price and increase it  to ensure the transaction goes through
         let provider = contract.client();
         let sender_address = provider.address();
         let nonce = provider.get_transaction_count(sender_address, None).await?;
@@ -126,7 +126,7 @@ impl TradeExecutor {
         // Get current gas price and substantially increase it
         let base_gas_price = provider.get_gas_price().await?;
         let adjusted_gas_price = {
-            let multiplier = U256::from(200u64); // Increase by 50% instead of 10%
+            let multiplier = U256::from(200u64); // Increase by the number of percentage you like
             let divisor = U256::from(100u64);
             base_gas_price
                 .checked_mul(multiplier)
@@ -164,7 +164,7 @@ impl TradeExecutor {
             "swapExactTokensForTokens",
             (
                 amount_in,             // Amount of input token
-                min_out,          // Slippage Protection is avoided here as this code is not production ready
+                min_out,          // Slippage Protection is avoided here as this code is not production-ready
                 vec![token_in, token_out], // Path
                 self.recipient,        // Recipient address
                 deadline,              // Deadline
