@@ -22,6 +22,8 @@ The first addition to this repository is a **Rust-based Price Bot**. This bot fe
 - Parsing and utilizing ABIs for contract calls.
 - Efficient handling of asynchronous Rust code.
 
+**Note**: This section will be updated as I start adding more Codebases or Audit Reports
+
 ---
 
 ## 🛠️ Planned Features
