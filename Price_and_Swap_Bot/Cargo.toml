@@ -1,0 +1,9 @@
+[package]
+name = "price_bot"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ethers = { version = "2.0.14" }
+dotenv = "0.15" # For environment variables
+tokio = { version = "1", features = ["full"] }
